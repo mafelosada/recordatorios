@@ -1,0 +1,15 @@
+package repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import model.Medicamento;
+
+public interface Imedicamentos extends JpaRepository<Medicamento, Integer> {
+
+    @Query("SELECT m FROM medicamentoDTO m WHERE m.nombre LIKE %?1%")
+    List<Medicamento> findByNombreContainingIgnoreCase(String nombre);
+
+}
