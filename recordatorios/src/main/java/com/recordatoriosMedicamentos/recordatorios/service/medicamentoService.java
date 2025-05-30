@@ -1,14 +1,16 @@
-package service;
+package com.recordatoriosMedicamentos.recordatorios.service;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import com.recordatoriosMedicamentos.recordatorios.DTO.MedicamentoDTO;
+import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
+import com.recordatoriosMedicamentos.recordatorios.model.Medicamento;
+import com.recordatoriosMedicamentos.recordatorios.repository.Imedicamentos;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import DTO.MedicamentoDTO;
-import DTO.ResponsesDTO;
-import model.Medicamento;
-import repository.Imedicamentos;
 
 @Service
 public class medicamentoService {

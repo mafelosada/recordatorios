@@ -1,40 +1,23 @@
-package model;
+package com.recordatoriosMedicamentos.recordatorios.DTO;
 
 import java.sql.Time;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.recordatoriosMedicamentos.recordatorios.model.Medicamento;
+import com.recordatoriosMedicamentos.recordatorios.model.Pacientes;
 
-@Entity(name = "pacientesMedicamentos")
-public class Paciente_Medicamento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pacientes_medicamentos")
+public class Paciente_medicamentoDTO {
+    @JsonProperty("id")
     private int pacientes_medicamentosID;
-
-    @ManyToOne
-    @JoinColumn(name = "pacientesID", nullable = false)
     private Pacientes paciente;
-
-    @ManyToOne
-    @JoinColumn(name = "medicamentosID", nullable = false)
     private Medicamento medicamento;
-
-    @Column(name = "dosis", length = 50, nullable = false)
     private String dosis;
-
-    @Column(name = "horario", nullable = false)
     private Time horario;  
 
-    public Paciente_Medicamento() {
+    public Paciente_medicamentoDTO() {
     }
 
-    public Paciente_Medicamento(int pacientes_medicamentosID, Pacientes paciente, Medicamento medicamento, String dosis, Time horario) {
+    public Paciente_medicamentoDTO(int pacientes_medicamentosID, Pacientes paciente, Medicamento medicamento, String dosis, Time horario) {
         this.pacientes_medicamentosID = pacientes_medicamentosID;
         this.paciente = paciente;
         this.medicamento = medicamento;

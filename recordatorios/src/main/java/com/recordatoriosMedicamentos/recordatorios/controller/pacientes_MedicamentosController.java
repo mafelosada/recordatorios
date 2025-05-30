@@ -1,11 +1,13 @@
-package controller;
+package com.recordatoriosMedicamentos.recordatorios.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.recordatoriosMedicamentos.recordatorios.DTO.Paciente_medicamentoDTO;
+import com.recordatoriosMedicamentos.recordatorios.service.paciente_medicamentoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import service.paciente_medicamentoService;
-import DTO.Paciente_medicamentoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,11 +1,11 @@
-package repository;
+package com.recordatoriosMedicamentos.recordatorios.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import model.Pacientes;
+import com.recordatoriosMedicamentos.recordatorios.model.Pacientes;
 
 public interface Ipacientes extends JpaRepository<Pacientes, Integer> {
 

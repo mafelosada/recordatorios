@@ -1,4 +1,4 @@
-package service;
+package com.recordatoriosMedicamentos.recordatorios.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import DTO.BitacorasDTO;
-import DTO.ResponsesDTO;
-import model.Bitacoras;
-import repository.Ibitacora;
-import repository.Imedicamentos;
-import repository.Ipacientes;
+import com.recordatoriosMedicamentos.recordatorios.DTO.BitacorasDTO;
+import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
+import com.recordatoriosMedicamentos.recordatorios.model.Bitacoras;
+import com.recordatoriosMedicamentos.recordatorios.repository.Ibitacora;
+import com.recordatoriosMedicamentos.recordatorios.repository.Imedicamentos;
+import com.recordatoriosMedicamentos.recordatorios.repository.Ipacientes;
 
 
 @Service

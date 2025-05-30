@@ -1,4 +1,4 @@
-package DTO;
+package com.recordatoriosMedicamentos.recordatorios.DTO;
 
 public class ResponsesDTO {
      private String status;

@@ -1,18 +1,19 @@
-package service;
+package com.recordatoriosMedicamentos.recordatorios.service;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.http.HttpStatus;
 
-import repository.Ipacientes_medicamentos;
-import repository.Ipacientes;
-import repository.Imedicamentos;
-import model.Paciente_Medicamento;
-import DTO.Paciente_medicamentoDTO;
-import DTO.ResponsesDTO;
+import com.recordatoriosMedicamentos.recordatorios.DTO.Paciente_medicamentoDTO;
+import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
+import com.recordatoriosMedicamentos.recordatorios.model.Paciente_Medicamento;
+import com.recordatoriosMedicamentos.recordatorios.repository.Imedicamentos;
+import com.recordatoriosMedicamentos.recordatorios.repository.Ipacientes;
+import com.recordatoriosMedicamentos.recordatorios.repository.Ipacientes_medicamentos;
+
+import org.springframework.http.HttpStatus;
 
 @Service
 public class paciente_medicamentoService {

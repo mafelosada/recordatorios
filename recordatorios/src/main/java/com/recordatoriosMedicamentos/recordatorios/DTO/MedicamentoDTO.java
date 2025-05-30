@@ -1,26 +1,17 @@
-package model;
+package com.recordatoriosMedicamentos.recordatorios.DTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity(name = "medicamentos")
-public class Medicamento {
+public class MedicamentoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="medicamentosID")
+     @JsonProperty("id")
     private int medicamentosID;
-
-    @Column(name="nombreMedicamentos", length=100, nullable=false)
     private String nombreMedicamentos;
 
-    public Medicamento() {
+    public MedicamentoDTO() {
     }
 
-    public Medicamento(int medicamentosID, String nombreMedicamentos) {
+    public MedicamentoDTO(int medicamentosID, String nombreMedicamentos) {
         this.medicamentosID = medicamentosID;
         this.nombreMedicamentos = nombreMedicamentos;
     }
@@ -38,5 +29,4 @@ public class Medicamento {
     public void setNombreMedicamentos(String nombreMedicamentos) {
         this.nombreMedicamentos = nombreMedicamentos;
     }
-
 }

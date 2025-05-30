@@ -1,42 +1,25 @@
-package model;
+package com.recordatoriosMedicamentos.recordatorios.DTO;
 
 import java.util.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.recordatoriosMedicamentos.recordatorios.model.Medicamento;
+import com.recordatoriosMedicamentos.recordatorios.model.Pacientes;
 
-@Entity(name = "bitacora")
-public class Bitacoras {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bitacoraID")
+public class BitacorasDTO {
+     
     private int bitacoraID;
-
-    @ManyToOne
-    @JoinColumn(name = "pacientesID", nullable = false)
     private Pacientes paciente;
-
-    @ManyToOne
-    @JoinColumn(name = "medicamentosID", nullable = false)
     private Medicamento medicamento;
-
-    @Column(name = "fecha", nullable = false)
     private Date fecha;
 
-    public Bitacoras() {
+    public BitacorasDTO() {
     }
 
-    public Bitacoras(int bitacoraID, Pacientes paciente, Medicamento medicamento, String fecha) {
+    public BitacorasDTO(int bitacoraID, Pacientes paciente, Medicamento medicamento, Date fecha) {
         this.bitacoraID = bitacoraID;
         this.paciente = paciente;
         this.medicamento = medicamento;
-        this.fecha = java.sql.Date.valueOf(fecha);
+        this.fecha = fecha;
     }
 
     public int getBitacoraID() {
@@ -66,4 +49,5 @@ public class Bitacoras {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
 }
