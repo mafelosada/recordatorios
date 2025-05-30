@@ -3,27 +3,23 @@ package com.recordatoriosMedicamentos.recordatorios.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recordatoriosMedicamentos.recordatorios.DTO.MedicamentoDTO;
 import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
-import com.recordatoriosMedicamentos.recordatorios.service.medicamentoService;
+import com.recordatoriosMedicamentos.recordatorios.service.MedicamentosService;
 
 @RestController
-@RequestMapping("/medicamentos/")
-@CrossOrigin(origins = "http://")
-public class medicamentoController {
+@RequestMapping("/medicamentos")
+public class MedicamentosController {
 
     @Autowired
-    private medicamentoService medicamentoService;
+    private MedicamentosService medicamentoService;
 
     @PostMapping("/")
     public ResponseEntity<Object> registerMedicamento(@RequestBody MedicamentoDTO medicamento) {
@@ -31,18 +27,12 @@ public class medicamentoController {
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<Object> getAllMedicamentos() {
-        var listaMedicamentos = medicamentoService.findAll();
-        return new ResponseEntity<>(listaMedicamentos, HttpStatus.OK);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneMedicamento(@PathVariable int id) {
         var medicamento = medicamentoService.findById(id);
-        if (!medicamento.isPresent())
+        if (medicamento.isEmpty())
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(medicamento, HttpStatus.OK);
+        return new ResponseEntity<>(medicamento.get(), HttpStatus.OK);
     }
 
     @GetMapping("/filter/{filter}")
@@ -52,17 +42,4 @@ public class medicamentoController {
             return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(medicamentos, HttpStatus.OK);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteMedicamento(@PathVariable int id) {
-        var message = medicamentoService.deleteMedicamento(id);
-        return new ResponseEntity<>(message, HttpStatus.OK);
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateMedicamento(@PathVariable int id, @RequestBody MedicamentoDTO medicamentoDTO) {
-        var message = medicamentoService.updateMedicamento(id, medicamentoDTO);
-        return new ResponseEntity<>(message, HttpStatus.OK);
-    }
-
 }

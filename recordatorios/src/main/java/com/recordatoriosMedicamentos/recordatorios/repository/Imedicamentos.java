@@ -9,7 +9,7 @@ import com.recordatoriosMedicamentos.recordatorios.model.Medicamento;
 
 public interface Imedicamentos extends JpaRepository<Medicamento, Integer> {
 
-    @Query("SELECT m FROM medicamentoDTO m WHERE m.nombre LIKE %?1%")
+   @Query("SELECT m FROM Medicamento m WHERE LOWER(m.nombreMedicamentos) LIKE LOWER(CONCAT('%', ?1, '%'))")
     List<Medicamento> findByNombreContainingIgnoreCase(String nombre);
 
 }

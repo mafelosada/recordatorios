@@ -2,6 +2,8 @@ package com.recordatoriosMedicamentos.recordatorios.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +12,9 @@ import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
 import com.recordatoriosMedicamentos.recordatorios.model.Medicamento;
 import com.recordatoriosMedicamentos.recordatorios.repository.Imedicamentos;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Service
-public class medicamentoService {
+public class MedicamentosService {
+
     @Autowired
     private Imedicamentos data;
 
@@ -29,54 +30,27 @@ public class medicamentoService {
         return data.findById(id);
     }
 
-    public ResponsesDTO deleteMedicamento(int id) {
-        Optional<Medicamento> medicamento = findById(id);
-        if (!medicamento.isPresent()) {
-            return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "El registro no existe");
-        }
-
-        data.deleteById(id);  // Aquí realmente se elimina el registro.
-
-        return new ResponsesDTO(HttpStatus.OK.toString(), "Se eliminó correctamente");
-    }
-
     public ResponsesDTO save(MedicamentoDTO medicamentoDTO) {
         Medicamento medicamento = convertToModel(medicamentoDTO);
         data.save(medicamento);
-        ResponsesDTO respuesta = new ResponsesDTO(
-            HttpStatus.OK.toString(),
-            "Se guardó correctamente"
-        );
-        return respuesta;
-    }
-    public ResponsesDTO updateMedicamento(int id, MedicamentoDTO medicamentoDTO) {
-        Optional<Medicamento> medicamento = findById(id);
-        if (!medicamento.isPresent()) {
-            return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "El registro no existe");
-        }
-
-        Medicamento updatedMedicamento = medicamento.get();
-        updatedMedicamento.setNombreMedicamentos(medicamentoDTO.getNombreMedicamentos());
-        data.save(updatedMedicamento);
-
-        return new ResponsesDTO(HttpStatus.OK.toString(), "Se actualizó correctamente");
+        return new ResponsesDTO(HttpStatus.OK.toString(), "Se guardó correctamente");
     }
 
+    // Convertir DTO a modelo
     private Medicamento convertToModel(MedicamentoDTO medicamentoDTO) {
         Medicamento medicamento = new Medicamento();
+        medicamento.setMedicamentosID(medicamentoDTO.getMedicamentosID());
         medicamento.setNombreMedicamentos(medicamentoDTO.getNombreMedicamentos());
         return medicamento;
     }
 
+    // Convertir modelo a DTO
     public MedicamentoDTO convertToDTO(Medicamento medicamento) {
         MedicamentoDTO medicamentoDTO = new MedicamentoDTO(
-            0,
+            medicamento.getMedicamentosID(),
             medicamento.getNombreMedicamentos()
         );
         return medicamentoDTO;
     }
-
-
-
 
 }

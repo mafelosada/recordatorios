@@ -13,7 +13,8 @@ import com.recordatoriosMedicamentos.recordatorios.model.Pacientes;
 import com.recordatoriosMedicamentos.recordatorios.repository.Ipacientes;
 
 @Service
-public class pacienteService {
+public class PacientesService {
+
     @Autowired
     private Ipacientes data;
 
@@ -21,23 +22,13 @@ public class pacienteService {
         return data.findAll();
     }
 
-    public List<Pacientes> getListPacientesForName(String nombre) {
-        return data.findByNombreContainingIgnoreCase(nombre);
-    }
-
     public Optional<Pacientes> findById(int id) {
         return data.findById(id);
     }
 
-    public ResponsesDTO deletePaciente(int id) {
-        Optional<Pacientes> paciente = findById(id);
-        if (!paciente.isPresent()) {
-            return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "El registro no existe");
-        }
-
-        data.deleteById(id);  // Aquí realmente se elimina el registro.
-
-        return new ResponsesDTO(HttpStatus.OK.toString(), "Se eliminó correctamente");
+    // Búsqueda por nombre - usar solo después de corregir el repository
+    public List<Pacientes> getListPacientesForName(String nombre) {
+        return data.findByNombreContainingIgnoreCase(nombre);
     }
 
     public ResponsesDTO save(PacientesDTO pacientesDTO) {
@@ -48,22 +39,6 @@ public class pacienteService {
             "Se guardó correctamente"
         );
         return respuesta;
-    }
-
-    public ResponsesDTO updatePaciente(int id, PacientesDTO pacientesDTO) {
-        Optional<Pacientes> pacientes = findById(id);
-        if (!pacientes.isPresent()) {
-            return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "El registro no existe");
-        }
-
-        Pacientes updatedPaciente = pacientes.get();
-        updatedPaciente.setNombre(pacientesDTO.getNombre());
-        updatedPaciente.setApellido(pacientesDTO.getApellido());
-        updatedPaciente.setTelefono(pacientesDTO.getTelefono());
-        updatedPaciente.setEmail(pacientesDTO.getEmail());
-        data.save(updatedPaciente);
-
-        return new ResponsesDTO(HttpStatus.OK.toString(), "Se actualizó correctamente");
     }
 
     public PacientesDTO convertToDTO(Pacientes paciente) {
@@ -79,7 +54,7 @@ public class pacienteService {
 
     public Pacientes convertToModel(PacientesDTO pacientesDTO) {
         Pacientes paciente = new Pacientes(
-            0,
+            0, // El ID se generará automáticamente
             pacientesDTO.getNombre(),
             pacientesDTO.getApellido(),
             pacientesDTO.getTelefono(),
@@ -87,5 +62,4 @@ public class pacienteService {
         );
         return paciente;
     }
-
 }
