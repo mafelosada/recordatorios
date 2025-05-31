@@ -38,10 +38,11 @@ public class PacienteMedicamentoService {
 
     public ResponsesDTO save(PacienteMedicamentoDTO dto) {
         // Validar existencia de paciente y medicamento
-        Optional<Pacientes> pacienteOpt = pacientesRepo.findById(dto.getPacienteId());
+       Optional<Pacientes> pacienteOpt = pacientesRepo.findById(dto.getPacienteId());
         if (pacienteOpt.isEmpty()) {
             return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "Paciente no encontrado");
         }
+
         Optional<Medicamento> medicamentoOpt = medicamentosRepo.findById(dto.getMedicamentoId());
         if (medicamentoOpt.isEmpty()) {
             return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "Medicamento no encontrado");

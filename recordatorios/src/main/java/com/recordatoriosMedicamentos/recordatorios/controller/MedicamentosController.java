@@ -15,7 +15,7 @@ import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
 import com.recordatoriosMedicamentos.recordatorios.service.MedicamentosService;
 
 @RestController
-@RequestMapping("/medicamentos")
+@RequestMapping("/medicamentos/")
 public class MedicamentosController {
 
     @Autowired

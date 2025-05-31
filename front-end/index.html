@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Pacientes y Medicamentos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/register.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gestión de Pacientes y Medicamentos</h1>
+
+        <button onclick="mostrarFormulario('paciente')">Registrar Paciente</button>
+        <button onclick="mostrarFormulario('medicamento')">Registrar Medicamento</button>
+    </div>
+
+    <!-- Formulario de Paciente -->
+    <div id="formPaciente" class="formulario">
+        <h2>Registrar Paciente</h2>
+        <form id="pacienteForm">
+            <input type="text" name="nombre" placeholder="Nombre" required><br>
+            <input type="text" name="apellido" placeholder="Apellido" required><br>
+            <input type="text" name="telefono" placeholder="Teléfono" required><br>
+            <input type="email" name="email" placeholder="Email" required><br>
+            <button type="submit">Siguiente</button>
+        </form>
+    </div>
+
+    <!-- Formulario de Medicamento -->
+    <div id="formMedicamento" class="formulario">
+        <h2>Registrar Medicamento</h2>
+        <form id="medicamentoForm">
+            <input type="text" name="nombre" placeholder="Nombre del medicamento" required><br>
+            <button type="submit">Guardar Medicamento</button>
+        </form>
+    </div>
+
+</body>
+</html>
