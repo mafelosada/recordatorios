@@ -7,7 +7,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.recordatoriosMedicamentos.recordatorios.DTO.PacienteMedicamentoDTO;
 import com.recordatoriosMedicamentos.recordatorios.DTO.ResponsesDTO;
@@ -15,7 +21,8 @@ import com.recordatoriosMedicamentos.recordatorios.model.Paciente_Medicamento;
 import com.recordatoriosMedicamentos.recordatorios.service.PacienteMedicamentoService;
 
 @RestController
-@RequestMapping("/pacientesMedicamentos/")
+@RequestMapping("/pacientesMedicamentos")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class PacienteMedicamentoController {
 
     @Autowired

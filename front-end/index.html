@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Registro de Pacientes y Medicamentos</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/register.js"></script>
 </head>
 <body>
 
@@ -13,6 +12,7 @@
 
         <button onclick="mostrarFormulario('paciente')">Registrar Paciente</button>
         <button onclick="mostrarFormulario('medicamento')">Registrar Medicamento</button>
+        <button onclick="mostrarFormulario('pacienteMedicamento')">Asignar Medicamento a Paciente</button>
     </div>
 
     <!-- Formulario de Paciente -->
@@ -31,10 +31,65 @@
     <div id="formMedicamento" class="formulario">
         <h2>Registrar Medicamento</h2>
         <form id="medicamentoForm">
-            <input type="text" name="nombre" placeholder="Nombre del medicamento" required><br>
+            <input type="text" name="nombreMedicamentos" placeholder="Nombre del medicamento" required><br>
             <button type="submit">Guardar Medicamento</button>
         </form>
     </div>
 
+   
+    <!-- Formulario de PacienteMedicamento -->
+    <div id="formPacienteMedicamento" class="formulario" style="display:none;">
+        <h2>Asignar Medicamento a Paciente</h2>
+        <form id="pacienteMedicamentoForm">
+            <div class="form-group">
+                <label for="pacientesSelect">Paciente:</label>
+                <select name="pacienteId" id="pacientesSelect" required>
+                    <option value="">Seleccione un paciente</option>
+                    <!-- Se llenará dinámicamente con JS -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="medicamentosSelect">Medicamento:</label>
+                <select name="medicamentoId" id="medicamentosSelect" required>
+                    <option value="">Seleccione un medicamento</option>
+                    <!-- Se llenará dinámicamente con JS -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dosis">Dosis:</label>
+                <input type="text" name="dosis" id="dosis" placeholder="Dosis (ej. 1 tableta)" required>
+            </div>
+
+            <div class="form-group">
+                <label for="horario">Horario:</label>
+                <input type="time" name="horario" id="horario" required>
+            </div>
+
+            <button type="submit">Asignar Medicamento</button>
+        </form>
+        
+        <!-- Tabla para mostrar asignaciones existentes -->
+        <div class="asignaciones-container" style="margin-top: 30px;">
+            <h3>Asignaciones Existentes</h3>
+            <table id="asignacionesTable">
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Medicamento</th>
+                        <th>Dosis</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Se llenará dinámicamente con JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="js/register.js"></script>
 </body>
 </html>
