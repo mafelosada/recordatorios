@@ -1,7 +1,8 @@
 package com.recordatoriosMedicamentos.recordatorios.DTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Time;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PacienteMedicamentoDTO {
 
@@ -29,6 +30,7 @@ public class PacienteMedicamentoDTO {
         this.horario = horario;
     }
 
+    // Getters y setters...
     public int getPacientesMedicamentosID() {
         return pacientesMedicamentosID;
     }

@@ -28,6 +28,9 @@ public class PacienteMedicamentoService {
     @Autowired
     private Imedicamentos medicamentosRepo;
 
+    @Autowired
+    private emailService emailService;
+
     public List<Paciente_Medicamento> findAll() {
         return pacienteMedicamentoRepo.findAll();
     }
@@ -38,7 +41,7 @@ public class PacienteMedicamentoService {
 
     public ResponsesDTO save(PacienteMedicamentoDTO dto) {
         // Validar existencia de paciente y medicamento
-       Optional<Pacientes> pacienteOpt = pacientesRepo.findById(dto.getPacienteId());
+        Optional<Pacientes> pacienteOpt = pacientesRepo.findById(dto.getPacienteId());
         if (pacienteOpt.isEmpty()) {
             return new ResponsesDTO(HttpStatus.NOT_FOUND.toString(), "Paciente no encontrado");
         }
@@ -56,18 +59,34 @@ public class PacienteMedicamentoService {
 
         pacienteMedicamentoRepo.save(pacienteMedicamento);
 
-        return new ResponsesDTO(HttpStatus.OK.toString(), "Se guardó correctamente");
-    }
+        // Enviar correo de confirmación
+        Pacientes paciente = pacienteOpt.get();
+        Medicamento medicamento = medicamentoOpt.get();
 
-    // Método para convertir modelo a DTO si lo necesitas
+        String email = paciente.getEmail(); // asegúrate que exista este campo
+        String nombrePaciente = paciente.getNombre(); // asegúrate que exista este campo
+        String nombreMedicamento = medicamento.getNombreMedicamentos(); // asegúrate que exista este campo
+
+        if (email != null && !email.isEmpty()) {
+            emailService.enviarConfirmacionRegistroMedicamento(
+                email,
+                nombrePaciente,
+                nombreMedicamento,
+                dto.getDosis(),
+                dto.getHorario().toString() 
+            );
+        }
+
+        return new ResponsesDTO(HttpStatus.OK.toString(), "Se guardó correctamente y se envió el correo");
+    } // <- Esta llave de cierre faltaba
+
     public PacienteMedicamentoDTO convertToDTO(Paciente_Medicamento pm) {
         return new PacienteMedicamentoDTO(
             pm.getPacientes_medicamentosID(),
             pm.getPaciente().getPacientesID(),
             pm.getMedicamento().getMedicamentosID(),
             pm.getDosis(),
-            pm.getHorario()
+            pm.getHorario() // <- Cambié esto: quité el .toString() porque el constructor espera Time, no String
         );
     }
-    
 }
